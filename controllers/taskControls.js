@@ -85,16 +85,13 @@ export const deleteTask = async (req, res) => {
   try {
     const {taskId} = req.params;
 
-    // Check if the task exists
+    
     const existingTask = await Task.findById(taskId);
     if (!existingTask) {
       return res.status(404).json({ error: 'Task not found' });
     }
 
-    // Check if the logged-in user has permission to delete the task (optional)
-    // For example, you might want to check if the task belongs to the logged-in user
-
-    // Delete the task
+    
     await Task.findByIdAndDelete(taskId);
 
     res.status(200).json({ message: 'Task deleted successfully' });
